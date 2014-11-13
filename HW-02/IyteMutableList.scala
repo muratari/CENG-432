@@ -12,8 +12,22 @@ class IyteMutableList {
 
   private var head : IyteListNode = null;
 
+  def this(integers : Int*){
+    this();
+    this.add(integers.toArray);
+  }
+  def this(integers : Array[Int]){
+    this();
+    this.add(integers);
+  }
+
   def add(integers : Int*): Unit ={
     integers.foreach(this.add);
+  }
+  def add(integers : Array[Int]): Unit ={
+    for(i <- integers){
+      this.add(i);
+    }
   }
   def add(x:Int): Unit ={
     val newNode : IyteListNode = new IyteListNode(x);
@@ -53,10 +67,7 @@ class IyteMutableList {
 object IyteMutableList {
 
   def apply() = new IyteMutableList();
-  def apply(integers : Int*) = {
-    val list = new IyteMutableList();
-    integers.foreach(list.add);
-    list;
-  }
+  def apply(integers : Array[Int]) = new IyteMutableList(integers);
+  def apply(integers : Int*) = new IyteMutableList(integers.toArray);
 
 }

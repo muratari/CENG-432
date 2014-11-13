@@ -25,6 +25,9 @@ class IyteImmutableList {
       }
     }
   }
+  def this(integers : Int*){
+    this(integers.toArray);
+  }
 
   def add(integers : Int*) : IyteImmutableList ={
     add(integers.toArray);
@@ -64,6 +67,7 @@ class IyteImmutableList {
 
 object IyteImmutableList {
   def apply() = new IyteImmutableList();
+  def apply(integers : Array[Int]) = new IyteImmutableList(integers);
   def apply(integers : Int*) = new IyteImmutableList(integers.toArray);
 
 }
