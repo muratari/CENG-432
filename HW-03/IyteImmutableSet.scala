@@ -7,7 +7,6 @@ class IyteImmutableSet {
 
   def this(array : Array[Int]){
     this();
-    //TODO NOT WORKING!!!
     storage = array.distinct;
     storage = this.sort(storage);
   }
@@ -38,11 +37,10 @@ class IyteImmutableSet {
   }
 
   private def sort(arrayToBeSorted:Array[Int]): Array[Int] = {
-    //TODO NOT WORKING!!!
     if (arrayToBeSorted.length < 2) arrayToBeSorted
     else {
-      val pivot = arrayToBeSorted(arrayToBeSorted.length / 2)
-      sort(arrayToBeSorted filter (pivot >)) ++ (arrayToBeSorted filter (pivot ==)) ++ sort(arrayToBeSorted filter (pivot <))
+      val midPoint = arrayToBeSorted(arrayToBeSorted.length / 2)
+      sort(arrayToBeSorted filter (midPoint >)) ++ (arrayToBeSorted filter (midPoint ==)) ++ sort(arrayToBeSorted filter (midPoint <))
     }
   }
 

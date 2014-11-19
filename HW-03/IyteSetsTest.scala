@@ -27,7 +27,7 @@ object IyteSetsTest extends App{
 
   */
 
-  val random = new IyteImmutableList(Array(50,40,70,55,40));
+  val random = new IyteImmutableSet(50,40,70,55,40);
   println(random.toString());
 
 }
