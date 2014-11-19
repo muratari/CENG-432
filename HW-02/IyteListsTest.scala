@@ -1,7 +1,7 @@
 /**
  * Created by Murat on 12.11.2014.
  */
-object Test extends App{
+object IyteListsTest extends App{
 
   println("##### Testing IyteMutableList #####");
 
