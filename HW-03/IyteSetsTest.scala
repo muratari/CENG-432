@@ -1,3 +1,5 @@
+import java.io.PrintWriter
+
 /**
  * Created by Murat on 18.11.2014.
  */
@@ -27,7 +29,93 @@ object IyteSetsTest extends App{
 
   */
 
-  val random = new IyteImmutableSet(50,40,70,55,40);
-  println(random.toString());
+
+  /*
+  var startTime : Long = 0;
+  var endTime : Long = 0;
+
+  val w = new PrintWriter("D:\\Murat\\Desktop\\ceng316\\mutableAddTest.txt")
+
+  //add test with 1000000 call
+  val testList : List[Int] = scala.util.Random.shuffle((0 until 1000000).toList);
+  var mSet = IyteMutableSet();
+  var i = 0;
+
+  for( integer <- testList){
+    startTime = System.nanoTime();
+    mSet.add(integer);
+    endTime = System.nanoTime();
+
+    w.println(i + " " + (endTime - startTime) + " Added integer:" + integer);
+    i+=1;
+  }
+  */
+
+  /*
+  var startTime : Long = 0;
+  var endTime : Long = 0;
+
+  //contains test
+  val w2 = new PrintWriter("D:\\Murat\\Desktop\\ceng316\\mutableContainsTest.txt");
+
+  //test prep
+  val mSet2 = IyteMutableSet();
+
+  for( i:Int <- 0 until 1000000 by 2){
+    mSet2.add(i);
+  }
+
+  for( i: Int <- 0 until 1000000){
+    startTime = System.nanoTime();
+    val res = mSet2.contains(i);
+    endTime = System.nanoTime();
+
+    w2.println(i + " " + (endTime - startTime) + " " + res);
+  }
+  */
+
+  /*
+  var startTime : Long = 0;
+  var endTime : Long = 0;
+
+  //contains test
+  val w3 = new PrintWriter("D:\\Murat\\Desktop\\ceng316\\immutableContainsTest.txt");
+
+  //test prep
+  val mSet3 = IyteImmutableSet((0 until 1000000 by 2).toArray);
+
+  for( i: Int <- 0 until 1000000){
+    startTime = System.nanoTime();
+    val res = mSet3.contains(i);
+    endTime = System.nanoTime();
+
+    w3.println(i + " " + (endTime - startTime) + " " + res);
+
+    if(i%2 == 0 && res == false) println("TEST FAILED");
+  }
+  */
+
+
+  /*
+  var startTime : Long = 0;
+  var endTime : Long = 0;
+
+  //contains test
+  val w4 = new PrintWriter("D:\\Murat\\Desktop\\ceng316\\immutableAddTest.txt");
+
+  //test prep
+  val testList : List[Int] = scala.util.Random.shuffle((0 until 1000000).toList);
+  var mSet4 = IyteImmutableSet();
+  var i = 0;
+
+  for( integer <- testList){
+    startTime = System.nanoTime();
+    mSet4 = mSet4.add(integer);
+    endTime = System.nanoTime();
+
+    w4.println(i + " " + (endTime - startTime));
+    i+=1;
+  }
+  */
 
 }
