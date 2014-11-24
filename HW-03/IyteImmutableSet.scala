@@ -197,11 +197,52 @@ class IyteImmutableSet {
   }
 
   private def sort(arrayToBeSorted: Array[Int]): Array[Int] = {
-    if (arrayToBeSorted.length < 2) arrayToBeSorted
-    else {
-      val midPoint = arrayToBeSorted(arrayToBeSorted.length / 2)
-      sort(arrayToBeSorted filter (midPoint >)) ++ (arrayToBeSorted filter (midPoint ==)) ++ sort(arrayToBeSorted filter (midPoint <))
+    val arr = new Array[Int](arrayToBeSorted.length);
+
+    for(i:Int<-0 until arrayToBeSorted.length){
+      arr(i) = arrayToBeSorted(i);
     }
+
+    this.quickSort(arr, 0, arr.length-1)
+
+    return arr;
+  }
+
+  private def quickSort(arrayToBeSorted: Array[Int], iLow:Int, iHigh:Int): Unit ={
+    if (arrayToBeSorted == null || arrayToBeSorted.length == 0)
+      return;
+
+    if (iLow >= iHigh)
+      return;
+
+    val middle = iLow + (iHigh - iLow) / 2;
+    val pivot = arrayToBeSorted(middle);
+
+    var i = iLow;
+    var j = iHigh;
+    while (i <= j) {
+      while (arrayToBeSorted(i) < pivot) {
+        i+=1;
+      }
+
+      while (arrayToBeSorted(j) > pivot) {
+        j-=1;
+      }
+
+      if (i <= j) {
+        val temp = arrayToBeSorted(i);
+        arrayToBeSorted(i) = arrayToBeSorted(j);
+        arrayToBeSorted(j) = temp;
+        i+=1;
+        j-=1;
+      }
+    }
+
+    if (iLow < j)
+      quickSort(arrayToBeSorted, iLow, j);
+
+    if (iHigh > i)
+      quickSort(arrayToBeSorted, i, iHigh);
   }
 
   def getIndex(x: Int): Int = {

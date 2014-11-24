@@ -118,4 +118,32 @@ object IyteSetsTest extends App{
   }
   */
 
+  val a = IyteImmutableSet();
+  println("a: " + a.toString());
+  val b = a.add(1);
+  println("a: " + a.toString());
+  println("b: " + b.toString());
+  val c = b.add(5,6,9,3,7);
+  println("a: " + a.toString());
+  println("b: " + b.toString());
+  println("c: " + c.toString());
+
+  val d = IyteMutableSet();
+  println("d: " + d.toString());
+  val e = d;
+  e.add(1);
+  println("d: " + d.toString());
+  println("e: " + d.toString());
+  e.add(1);
+  println("e: " + d.toString());
+  e.add(2);
+  println("e: " + d.toString());
+  e.add(4,3,4,7,5,0,9);
+  println(e.contains(1));
+  println(e.contains(2));
+  println(e.contains(3));
+  println(e.contains(4));
+  println(e.contains(6));
+  println(e.contains(8));
+
 }

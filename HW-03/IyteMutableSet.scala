@@ -13,10 +13,7 @@
  */
 class IyteMutableSet {
 
-  private val DEFAULT_INITIAL_SIZE: Int = 64000;
-  private val GROW_FACTOR: Int = 2;
-
-  private var storage: Array[Int] = new Array[Int](DEFAULT_INITIAL_SIZE);
+  private var storage: Array[Int] = new Array[Int](IyteMutableSet.DEFAULT_INITIAL_SIZE);
   private var lastFilledIndex = -1;
 
   def this(initialSize: Int) {
@@ -27,7 +24,8 @@ class IyteMutableSet {
   }
 
   def this(integers: Array[Int]) {
-    this(integers.length * GROW_FACTOR);
+    this( integers.length * IyteMutableSet.GROW_FACTOR);
+
     for (x: Int <- integers) {
       this.add(x);
     }
@@ -35,6 +33,10 @@ class IyteMutableSet {
 
   def this(integers: Int*) {
     this(integers.toArray);
+  }
+
+  def add(integers: Int*): Unit ={
+    integers.foreach(add);
   }
 
   def add(x: Int): Boolean = {
@@ -150,14 +152,14 @@ class IyteMutableSet {
   }
 
   private def growStorage(): Unit = {
-    growStorage(storage.length * GROW_FACTOR);
+    growStorage(storage.length * IyteMutableSet.GROW_FACTOR);
   }
 
   private def growStorage(newCapacity: Int): Unit = {
     var newLength = storage.length;
 
     while (newLength < newCapacity) {
-      newLength *= GROW_FACTOR;
+      newLength *= IyteMutableSet.GROW_FACTOR;
     }
 
     var newStorage: Array[Int] = new Array[Int](newLength);
@@ -192,6 +194,9 @@ class IyteMutableSet {
 }
 
 object IyteMutableSet {
+
+  val DEFAULT_INITIAL_SIZE: Int = 64000;
+  val GROW_FACTOR: Int = 2;
 
   def apply() = new IyteMutableSet();
 
