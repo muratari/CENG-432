@@ -4,8 +4,7 @@
 class IyteHashTable {
 
   private val DEFAULT_LOAD_FACTOR : Float = 0.7f;
-  private val DEFAULT_CAPACITY : Int = 160000;
-  private val DEFAULT_HORIZONTAL_LIMIT = 8;
+  private val DEFAULT_CAPACITY : Int = 1 << 15;
   private val DEFAULT_GROW_FACTOR = 2;
 
   private val LOAD_FACTOR = DEFAULT_LOAD_FACTOR;
@@ -17,11 +16,38 @@ class IyteHashTable {
 
   private var table : Array[IyteStringEntry] = new Array[IyteStringEntry](capacity);
 
+  private class IyteStringEntry(val hash: Int, val key: String, var value: String, var next: IyteStringEntry);
+
   def set(key: String, value: String): Unit = {
-
     val h = hash(key);
+    val index = indexFor(h);
 
-    val keyExists: Boolean = put(h,key,value);
+    var p = table(index);
+
+    var keyExists: Boolean = false;
+
+    if(p == null){
+      table(index) = new IyteStringEntry(h,key,value,null);
+    }else{
+      
+      var ended : Boolean = false;
+
+      while(!keyExists && !ended){
+        if(p.hash == h && p.key == key){
+          keyExists = true;
+        }else if(p.next != null){
+          p = p.next;
+        }else{
+          ended = true;
+        }
+      }
+
+      if(keyExists){
+        p.value = value
+      }else{
+        p.next = new IyteStringEntry(h,key,value, null);
+      }
+    }
 
     if(!keyExists){
       size += 1;
@@ -46,8 +72,12 @@ class IyteHashTable {
       var keyFound: Boolean = false;
 
       do{
-        if(p.key == key){
-          keyFound = true;
+        if(p.hash == h){
+          if(p.key == key){
+            keyFound = true;
+          }else{
+            p = p.next;
+          }
         }else{
           p = p.next;
         }
@@ -86,37 +116,9 @@ class IyteHashTable {
     }
   }
 
-
-  private def put(hash: Int, key: String, value: String): Boolean = {
-    val index = indexFor(hash);
-
-    var p = table(index);
-
-    var keyExists : Boolean = false;
-
-    if(p == null){
-      table(index) = new IyteStringEntry(hash,key,value,null);
-    }else{
-
-      while(!keyExists && p.next != null){
-
-        if(p.next.hash != hash || p.next.key != key){
-          p = p.next
-        }else{
-          keyExists = true;
-        }
-      }
-
-      p.next = new IyteStringEntry(hash,key,value, p.next);
-    }
-
-    keyExists
-  }
-
   private def putEntryToEmptyTable(entry: IyteStringEntry): IyteStringEntry = {
     val index = indexFor(entry.hash);
     var p = table(index);
-    var oldNextEntry: IyteStringEntry = null;
 
     if(p == null){
       table(index) = entry;
@@ -128,7 +130,7 @@ class IyteHashTable {
       p.next = entry;
     }
 
-    oldNextEntry = entry.next;
+    val oldNextEntry = entry.next;
     entry.next = null;
 
     oldNextEntry
@@ -175,4 +177,22 @@ class IyteHashTable {
 
     hash ^ k
   }
+
+  def hist(): Unit ={
+    for(i:Int<-0 until table.length){
+      var p = table(i);
+      if(p != null){
+        var i = 0;
+        while(p != null){
+          i += 1;
+          p = p.next;
+        }
+        println(i);
+      }
+    }
+  }
+}
+
+object IyteHashTable{
+  def apply() = new IyteHashTable();
 }
