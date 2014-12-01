@@ -3,6 +3,8 @@
  */
 class IyteHashTable {
 
+  //TODO Make bins treeifyable. At large data sets, it matters
+
   private val DEFAULT_LOAD_FACTOR : Float = 0.7f;
   private val DEFAULT_CAPACITY : Int = 1 << 15;
   private val DEFAULT_GROW_FACTOR = 2;
