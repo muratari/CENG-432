@@ -7,6 +7,11 @@ object IyteHashTableTest extends App {
 
   val t = IyteHashTable();
 
+  t.set(null, "1");
+  t.set("İki", "2");
+  println(t.get(null));
+
+  /*
   val filename = "HW-04\\wlist_match1.txt"
   val strings = scala.io.Source.fromFile(filename).getLines.toList;
 
@@ -31,5 +36,5 @@ object IyteHashTableTest extends App {
   println("ERROR2: " + eCount2)
   println("tSet: " + (tSet2 - tSet1));
   println("tGet: " + (tGet2 - tGet1));
-  println("Size: " + t.getSize());
+  println("Size: " + t.getSize());*/
 }

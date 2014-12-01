@@ -10,6 +10,8 @@ class IyteHashTable {
   private val LOAD_FACTOR = DEFAULT_LOAD_FACTOR;
   private val GROW_FACTOR = DEFAULT_GROW_FACTOR;
 
+  private val NULL_KEYWORD : String = "null";
+
   private var capacity = DEFAULT_CAPACITY;
   private var threshold : Int = (LOAD_FACTOR * capacity).asInstanceOf[Int];
   private var size : Int = 0;
@@ -19,7 +21,7 @@ class IyteHashTable {
   private class IyteStringEntry(val hash: Int, val key: String, var value: String, var next: IyteStringEntry);
 
   def set(key: String, value: String): Unit = {
-    val h = hash(key);
+    val h = if(key != null && key != "") hash(key) else hash(NULL_KEYWORD);
     val index = indexFor(h);
 
     var p = table(index);
@@ -29,7 +31,7 @@ class IyteHashTable {
     if(p == null){
       table(index) = new IyteStringEntry(h,key,value,null);
     }else{
-      
+
       var ended : Boolean = false;
 
       while(!keyExists && !ended){
@@ -60,7 +62,7 @@ class IyteHashTable {
   }
 
   def get(key: String): String = {
-    val h: Int = hash(key);
+    val h = if(key != null && key != "") hash(key) else hash(NULL_KEYWORD);
     val index: Int = indexFor(h);
 
     var p: IyteStringEntry = table(index);
