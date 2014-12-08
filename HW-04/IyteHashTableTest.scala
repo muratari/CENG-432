@@ -1,40 +1,54 @@
 import java.io.PrintWriter
 
+import scala.collection.mutable
+
 /**
  * Created by Murat on 29.11.2014.
  */
 object IyteHashTableTest extends App {
-
-  val t = IyteHashTable();
-
-  t.set(null, "1");
-  t.set("İki", "2");
-  println(t.get(null));
-
-  /*
   val filename = "HW-04\\wlist_match1.txt"
   val strings = scala.io.Source.fromFile(filename).getLines.toList;
 
-  val tSet1 = System.nanoTime()
-  for (line <- strings) {
-    t.set(line,line);
-  }
-  for (line <- strings) {
-    t.set(line,line);
-  }
-  val tSet2 = System.nanoTime()
 
-  val tGet1 = System.nanoTime()
-  var eCount2 = 0;
-  for(line <- strings){
-    if(line != t.get(line)){
-      eCount2 += 1;
+  for(i<-0 to 5){
+    val t = IyteHashTable();
+
+    val tSet1 = System.currentTimeMillis()
+    for(line<-strings){
+      t.set(line,line);
     }
-  }
-  val tGet2 = System.nanoTime()
+    val tSet2 = System.currentTimeMillis()
 
-  println("ERROR2: " + eCount2)
-  println("tSet: " + (tSet2 - tSet1));
-  println("tGet: " + (tGet2 - tGet1));
-  println("Size: " + t.getSize());*/
+    val tGet1 = System.currentTimeMillis()
+    for(line<-strings){
+      t.get(line)
+    }
+    val tGet2 = System.currentTimeMillis()
+
+    println("tSet #" + i + " " + (tSet2-tSet1));
+    println("tGet #" + i + " " + (tGet2-tGet1));
+    println();
+  }
+
+  for(i<- 0 to 5){
+    val s = mutable.HashMap[String,String]()
+
+    val sSet1 = System.currentTimeMillis()
+    for(line<-strings){
+      s.put(line,line);
+    }
+    val sSet2 = System.currentTimeMillis()
+
+    val sGet1 = System.currentTimeMillis()
+    for(line<-strings){
+      s.get(line)
+    }
+    val sGet2 = System.currentTimeMillis()
+
+    println("sSet #" + i + " " + (sSet2-sSet1));
+    println("sGet #" + i + " " + (sGet2-sGet1));
+    println();
+  }
+
+
 }

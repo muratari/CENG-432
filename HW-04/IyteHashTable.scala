@@ -182,7 +182,10 @@ class IyteHashTable {
     hash ^ k
   }
 
-  def hist(): Unit ={
+  def hist(): String ={
+
+    val b = new StringBuilder();
+
     for(i:Int<-0 until table.length){
       var p = table(i);
       if(p != null){
@@ -191,9 +194,15 @@ class IyteHashTable {
           i += 1;
           p = p.next;
         }
-        println(i);
+        b.append(i);
+      }else{
+        b.append("0");
       }
+
+      b.append("\n");
     }
+
+    b.toString()
   }
 }
 
