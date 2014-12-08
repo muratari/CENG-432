@@ -1,5 +1,3 @@
-import scala.collection.mutable
-
 /**
  * Created by Murat on 05.12.2014.
  */
@@ -14,7 +12,11 @@ trait RandomStuffTrait {
 object RandomStuff extends RandomStuffTrait {
 
   def transform(list: List[Int], op: (Int) => Int): List[Int] = {
-    for (element <- list) yield op(element)
+    if(list != null){
+      for (element <- list) yield op(element)
+    }else{
+      null
+    }
   }
 
   def allValid(list: List[Int], op: (Int) => Boolean): Boolean = {

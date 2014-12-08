@@ -8,7 +8,11 @@ object RandomStuffTest extends App{
   println(RandomStuff.transform(List(1,2,3), (x:Int) => x*2));
   println(RandomStuff.transform(List(2,4,6), (x:Int) => x/2));
   println(RandomStuff.transform(List(1,1,1), (x:Int) => x+2));
+  println(RandomStuff.transform(List(), (x:Int) => x+2));
+  println(RandomStuff.transform(null, (x:Int) => x+2));
   println(RandomStuff.allValid(List(1,2,3), (x:Int)=>x<5));
   println(RandomStuff.allValid(List(1,2,3), (x:Int)=>x<1));
   println(RandomStuff.allValid(List(1,2,3), (x:Int)=>x<3));
+  println(RandomStuff.allValid(List(), (x:Int)=>x<5));
+  println(RandomStuff.allValid(null, (x:Int)=>x<5));
 }
